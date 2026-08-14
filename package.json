@@ -1,5 +1,5 @@
 {
-  "name": "crav-stripe-webhooks",
+  "name": "javari-stripe-webhooks",
   "version": "1.0.0",
   "description": "Stripe webhook handler for CR AudioViz AI payment automation",
   "main": "api/webhooks/stripe.js",
