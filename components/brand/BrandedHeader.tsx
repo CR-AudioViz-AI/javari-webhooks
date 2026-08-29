@@ -37,11 +37,13 @@ export function BrandedHeader({ appName, appLogo, quickLinks = [] }: BrandedHead
   const checkAuthStatus = async () => {
     try {
       const session = await CentralServices.Auth.getSession();
-      if (session.success && session.data?.user) {
+      // 2026-08-27: was session.data?.user — one level too deep, so this was
+      // ALWAYS FALSE and a signed-in customer saw a signed-out header.
+      if (session.success && session.data) {
         setIsLoggedIn(true);
         setUser({
-          name: session.data.user.user_metadata?.full_name,
-          email: session.data.user.email,
+          name: session.data.name,
+          email: session.data.email,
         });
         
         // Fetch credits
