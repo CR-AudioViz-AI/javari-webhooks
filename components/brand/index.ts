@@ -19,4 +19,7 @@ export { CreditsBar } from './CreditsBar';
 export { AuthButtons } from './AuthButtons';
 
 // Tailwind config extension
-export { brandConfig as tailwindBrandConfig } from './tailwind.brand.config';
+// 2026-09-01: REMOVED org-wide. './tailwind.brand.config' does not exist in any of
+// these repos — the brand folder was copied between them and the file this line
+// names was never copied with it, so every importer of components/brand failed to
+// resolve. Nothing imports tailwindBrandConfig anywhere.
