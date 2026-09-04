@@ -5,10 +5,19 @@ import { publishableKey, supabaseUrl } from "@craudioviz/platform-sdk";
 const SUPABASE_URL = supabaseUrl();
 const SUPABASE_ANON_KEY = publishableKey();
 
+
+function safeRedirectPath(raw: string | null): string {
+  if (!raw) return '/';
+  if (!raw.startsWith('/') || raw.startsWith('//') || raw.startsWith('/\\')) return '/';
+  if (/^[a-z][a-z0-9+.-]*:/i.test(raw)) return '/';
+  if (raw.includes('\\')) return '/';
+  return raw;
+}
+
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get('code');
-  const redirectTo = requestUrl.searchParams.get('redirect_to') || '/';
+  const redirectTo = safeRedirectPath(requestUrl.searchParams.get('redirect_to'));
 
   if (code) {
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
