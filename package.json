@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vercel dev",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "prebuild": "node scripts/audit-route-auth.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
